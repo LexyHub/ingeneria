@@ -1,7 +1,3 @@
-Okay, aquí tienes la guía completa e integrada para diseñadores y desarrolladores web encargados de crear "Desks" en Lexy, incorporando toda la información relevante de los archivos proporcionados y la introducción específica para diseñadores.
-
----
-
 ## 🏡 Guía Completa para Diseñadores y Desarrolladores Web: Construyendo Desks en Lexy 🚀
 
 ### **Bienvenido/a al Diseño y Desarrollo de Desks en Lexy: Simplificando la Complejidad Legal**
