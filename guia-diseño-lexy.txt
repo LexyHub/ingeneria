@@ -1,0 +1,267 @@
+A continuación, se presenta la guía técnica definitiva del "Estándar Lexy", un compendio exhaustivo que integra **todos** los ejemplos visuales, conceptuales y técnicos discutidos, eliminando ambigüedades y asegurando especificaciones precisas para una implementación frontend robusta y coherente, ya sea por un desarrollador o una IA.
+
+*(Nota para IA/v0: Esta guía asume la disponibilidad local del archivo vectorial `logolexy.svg` y los archivos de fuente `Archivo` WOFF2, que deben ser referenciados correctamente en la implementación.)*
+
+---
+
+**Guía Técnica Definitiva de Diseño Visual y CSS "Estándar Lexy" (v13 - Arquitectura Integrada)**
+
+**0. Introducción y Visión General**
+
+*   **Propósito:** Especificar de forma técnica y detallada el sistema de diseño visual "Lexy" para asegurar la consistencia y calidad en todas las interfaces digitales (Fichas de Usuario Web/Móvil, Dashboards SaaS, Herramientas Internas).
+*   **Audiencia:** Desarrolladores Frontend (React) e Inteligencia Artificial de generación de código (ej. V0).
+*   **Metodología:** Esta guía se basa en el análisis de múltiples ejemplos de interfaces existentes y define tokens de diseño (Variables CSS), tipografía, sistemas de layout responsivo, y estilos de componentes detallados, incluyendo variantes y estados interactivos.
+*   **Restricción Fundamental:** Se debe utilizar **exclusivamente CSS estándar** y las variables CSS definidas en esta guía. **Está estrictamente prohibido el uso de sintaxis o clases de frameworks CSS como Tailwind (@apply, clases utilitarias compuestas).**
+
+**1. Principios de Diseño Fundamentales ("Guía de Visión Lexy")**
+
+*   **Interfaz Limpia:** Minimalismo, priorización de contenido, eliminación de ruido visual, uso intencional del espacio blanco.
+*   **Jerarquía Visual Clara:** Guía efectiva del usuario a través de la escala tipográfica, pesos, colores y espaciado. Elementos críticos deben ser inmediatamente identificables.
+*   **Consistencia Rigurosa:** Aplicación estricta y uniforme de todos los elementos del Design System (tokens, componentes, layouts) en todas las interfaces.
+*   **Feedback Visual Inmediato:** Proveer respuestas claras y predecibles a las interacciones del usuario (estados :hover, :focus-visible, :active, :disabled), validaciones y acciones críticas (ej. modales, notificaciones).
+*   **Funcionalidad Directa:** Diseño pragmático y eficiente, optimizado para flujos de trabajo legales y de gestión de datos, facilitando la comprensión y ejecución de tareas.
+*   **Adaptabilidad Responsiva:** Experiencia de usuario fluida y optimizada en los breakpoints definidos (Móvil ≤375px, Desktop ≥1440px).
+
+**2. Identidad de Marca**
+
+*   **Logo:**
+    *   **Archivo:** `logolexy.svg` (Vectorial, asumir disponibilidad local).
+    *   **Uso Principal:** Headers de Aplicación (SaaS), Pantallas de Login.
+    *   **CSS:**
+        ```css
+        .lexy-logo {
+          display: block;
+          height: 44px; /* Altura en Header SaaS */
+          width: auto;
+          flex-shrink: 0;
+        }
+        /* Estilo para Login, puede variar */
+        .lexy-logo--login {
+            /* Ej: Puede tener un tamaño diferente */
+            height: 80px;
+            margin-bottom: var(--space-xxl);
+        }
+        ```
+
+**3. Design Tokens (Variables CSS :root)**
+
+*   *(Definición completa de v12.1, incluyendo todos los colores, tipografía, espaciado, bordes, sombras y transiciones)*
+    ```css
+    :root {
+      /* === COLORES === */
+      --color-primary: #4C2EFF;
+      --color-primary-dark: #1800A3;
+      --color-accent-green: #146C3A;
+      --color-accent-green-hover: #0E4D2A;
+      --color-accent-pink: #C0187D;
+      --color-accent-pink-hover: #91125E;
+      --color-text-primary: #2F2F2F;
+      --color-text-secondary: #666666;
+      --color-text-placeholder: #6E6E6E;
+      --color-text-light: white;
+      --color-text-disabled: #8F8F8F;
+      --color-text-dark: black;
+      --color-link: var(--color-primary);
+      --color-link-hover: var(--color-primary-dark);
+      --color-link-contextual: var(--color-accent-green);
+      --color-bg-component: white;
+      --color-bg-app-secondary: #F7F6FF;
+      --color-bg-app-primary: #F4F4F4;
+      --color-bg-table-header: #F5F5F5;
+      --color-bg-disabled: #F2F2F2;
+      --color-bg-menu-active: #EEEBFF;
+      --color-bg-hover-secondary: #EEEBFF;
+      --color-bg-hover-secondary-green: #D9E8DE;
+      --color-bg-hover-outline-neutral: #FDEDF6;
+      --color-bg-overlay: rgba(0, 0, 0, 0.5);
+      --color-border-input: #C5C5C5;
+      --color-border-divider: rgba(0, 0, 0, 0.10);
+      --color-border-table-alt: #E6E6E6;
+      --color-border-info-box: rgba(20, 108, 58, 0.20);
+      --color-border-search-inactive: #BDBDBD;
+      --color-border-focus: var(--color-primary);
+      --color-border-error: #d32f2f;
+      --color-notification-badge: #D47500;
+      --color-tag-bg-1: #FAE9D2; --color-tag-bg-2: #E8F2CF; --color-tag-bg-3: #FCF0C5;
+      --color-tag-bg-4: #DDEFF0; --color-tag-bg-5: #F0E4F5; --color-tag-bg-6: #F7E4EC;
+      --color-bg-muted: var(--color-bg-table-header); /* Alias para step trail */
+      --color-border-muted: var(--color-border-divider);
+
+      /* === TIPOGRAFÍA === */
+      --font-family-base: 'Archivo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      --font-weight-regular: 400; --font-weight-medium: 500; --font-weight-semibold: 600;
+      --font-h1-size: 36px; --font-h1-line-height: 54px; --font-h1-weight: var(--font-weight-semibold);
+      --font-h2-size: 32px; --font-h2-line-height: 48px; --font-h2-weight: var(--font-weight-medium);
+      --font-h3-size: 24px; --font-h3-line-height: 36px; --font-h3-weight: var(--font-weight-medium);
+      --font-h4-size: 20px; --font-h4-line-height: 30px; --font-h4-weight: var(--font-weight-medium);
+      --font-body-size: 16px; --font-body-line-height: 24px; --font-body-weight: var(--font-weight-regular);
+      --font-body-medium-size: 16px; --font-body-medium-line-height: 24px; --font-body-medium-weight: var(--font-weight-medium);
+      --font-tooltip-size: 14px; --font-tooltip-line-height: 21px; --font-tooltip-weight: var(--font-weight-regular);
+      --font-mobile-base-size: var(--font-tooltip-size); --font-mobile-base-line-height: var(--font-tooltip-line-height);
+
+      /* === ESPACIADO (Basado en 4px) === */
+      --space-unit: 4px;
+      --space-xxs: calc(1 * var(--space-unit)); --space-xs: calc(2 * var(--space-unit)); --space-sm: calc(3 * var(--space-unit));
+      --space-md: calc(4 * var(--space-unit));  --space-lg: calc(6 * var(--space-unit)); --space-xl: calc(7 * var(--space-unit));
+      --space-xxl: calc(9 * var(--space-unit)); --space-xxxl: calc(12 * var(--space-unit));--space-xxxxl: calc(16 * var(--space-unit));
+      --space-page-margin-mobile: var(--space-lg);
+      --space-page-margin-desktop-ficha: 164px;
+      --space-page-margin-desktop-saas: var(--space-xl);
+      --gutter-mobile: var(--space-md);
+      --gutter-desktop: var(--space-lg);
+      --gutter-desktop-saas: var(--space-xl);
+
+      /* === BORDES Y SOMBRAS === */
+      --border-radius-sm: 4px;   --border-radius-md: 8px;   --border-radius-lg: 16px;
+      --border-radius-pill: 100px; --border-radius-circle: 50%;
+      --border-width-sm: 1px;     --border-width-md: 2px;    --border-width-lg: 3px;
+      --box-shadow-sm: 0px 1px 3px rgba(0, 0, 0, 0.05);
+      --box-shadow-md: 0px 4px 12px rgba(0, 0, 0, 0.05);
+      --box-shadow-lg: 0px 6px 18px rgba(0, 0, 0, 0.05);
+      --box-shadow-nav-button: 0px 2px 8px rgba(0, 0, 0, 0.08);
+      --box-shadow-input-header: 0px 1px 2px rgba(16, 24, 40, 0.05);
+
+      /* === TRANSICIONES === */
+      --transition-duration: 0.2s;
+      --transition-timing-function: ease;
+    }
+    ```
+
+**4. Tipografía y Fuente Base**
+
+*   **Fuente:** `Archivo`.
+*   **Carga Obligatoria:** Vía `@font-face` con WOFF2 locales.
+    ```css
+    @font-face { font-family: 'Archivo'; src: url('/assets/fonts/Archivo-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Archivo'; src: url('/assets/fonts/Archivo-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Archivo'; src: url('/assets/fonts/Archivo-SemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+    ```
+*   **CSS Base:**
+    ```css
+    body {
+      font-family: var(--font-family-base);
+      font-size: var(--font-body-size);
+      line-height: var(--font-body-line-height);
+      font-weight: var(--font-weight-regular);
+      color: var(--color-text-primary);
+      background-color: var(--color-bg-app-secondary); /* Ficha es default */
+      margin: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    /* ... (Resto de estilos base de v12.1) ... */
+    ```
+
+**5. Arquitectura de Página (Layouts)**
+
+*   **`lexy-layout-ficha` (Full Page - Fichas/Estudio):**
+    *   Uso: Formularios lineales, visualización detallada.
+    *   Estructura Desktop: `[Header Fijo opcional: Stepper/Tabs] + ContentArea(max-width: 1112px, margin: auto, padding-lateral: 164px) + [Footer Fijo opcional: Atrás]`.
+    *   Estructura Móvil: `Header Fijo App + Header Fijo ProgressBar + ContentArea(padding: 24px) Scrollable + Home Indicator`.
+    *   Fondo: `var(--color-bg-app-secondary)`.
+*   **`lexy-layout-saas` (Split Page - Dashboards/Herramientas):**
+    *   Uso: Dashboards, gestión compleja, navegación multi-sección.
+    *   Estructura Desktop: `Header Fijo (SaaS Style) + [Sidebar(width: 355px, padding: 28px) Fija + ContentArea(flex-grow:1, padding: 28px) Scrollable]`. Generalmente sin Footer de página.
+    *   Fondo (Content): `var(--color-bg-app-primary)`.
+*   **Grid System:**
+    *   Móvil (≤375px): 4 columnas, gutter `16px`.
+    *   Desktop (≥1440px): 12 columnas, gutter `24px` (Ficha) / `28px` (SaaS).
+
+**6. Iconografía**
+
+*   **Formato:** SVG.
+*   **Estilo:** Línea fina, Relleno, Ilustrativo.
+*   **Color:** `currentColor` o Variables `--color-*`.
+*   **Tamaños Clave:** `18px` a `84px` según componente y contexto.
+
+**7. Core Components (CSS Detallado Estándar)**
+
+*(Asegurar que todos los componentes se definan con CSS estándar y variables)*
+
+*   **Botones `.lexy-button`:**
+    *   Base, Tamaños (`--standard`, `--large`), Variantes (`--primary-blue`, `--secondary-blue`, `--primary-green`, `--secondary-green`, `--solid-pink`, `--outline-neutral`, `--social`, `--table-add`, `--table-delete`, `--help-float`).
+    *   Estados Interactivos:
+        ```css
+        .lexy-button:hover { /* Aplicar estilos hover de cada variante */ }
+        .lexy-button:focus-visible { /* Estado de foco */
+            outline: var(--border-width-md) solid var(--color-border-focus);
+            outline-offset: 2px;
+        }
+        .lexy-button:disabled { /* Estado deshabilitado */
+            opacity: 0.5;
+            cursor: not-allowed;
+            box-shadow: none !important;
+            background-color: var(--color-bg-disabled) !important;
+            color: var(--color-text-disabled) !important;
+            border-color: var(--color-border-input) !important; /* Para variantes outline */
+            outline: none !important;
+        }
+        /* Considerar :active para feedback al click */
+        .lexy-button:active { transform: translateY(1px); /* Ejemplo */ }
+        ```
+*   **Inputs & Fields `.lexy-input`, `.lexy-select`, etc.:** Wrapper con borde base, focus y error. Input/Select con estilos de texto, padding y placeholder. Estado filled (`background: #d4d4d4`).
+*   **Selects/Autocomplete (Dropdowns):** Lista `.lexy-select__dropdown`/`__suggestions` con scrollbar custom (thumb `primary`, track `#E6E6E6`), item (`__option`) con hover (`bg-hover-secondary`).
+*   **Tablas `.lexy-table`:** Header (`--bg-table-header`), celdas con bordes (`--color-border-divider`), radios en esquinas. Responsive.
+*   **Stepper `.lexy-stepper` (Desktop):** Estados visuales `active`/`completed` para círculos y líneas.
+*   **Progress Bar `.lexy-mobile-progress-nav` (Mobile):** Barra, segmentos (`active`/`inactive`), texto "X de Y", botones nav.
+*   **Tabs `.lexy-tabs`:**
+    *   Estándar (`--standard`): Item activo con `border-bottom: 3px solid var(--color-primary);` y texto `--color-primary`.
+    *   SVG (`--svg`): Fondos SVG verde/gris.
+*   **Modales `.lexy-modal`:** Overlay, Contenedor. Variantes Informativo y Confirmación (título negro).
+*   **Sidebar `.lexy-sidebar` (SaaS):** Títulos, Items (`--active`), Subitems, Badges.
+*   **Header `.lexy-header` (SaaS):** Logo, Searchbar, Acciones (Bell), User Menu (Avatar).
+*   **Cards `.lexy-card`, `.lexy-list-card`:** Contenedores con padding, radius, bg, borde/sombra. Estructura específica para `.lexy-list-card`.
+*   **Tooltips `.lexy-tooltip`:** Estilo negro, posicionamiento absoluto.
+
+**8. Responsividad**
+
+*   Implementar `@media (max-width: 375px)` y `@media (min-width: 1440px)`.
+*   Ajustar tokens de espaciado y tipografía.
+*   Adaptar Grids y Layouts.
+*   Utilizar componentes de navegación específicos (Stepper vs Progress Bar).
+*   Asegurar funcionalidad de Tablas en móvil (Scroll H o Stacked).
+
+9. Buenas Prácticas de Diseño y Experiencia de Usuario (UX/UI) - Directrices de Aplicación
+
+Más allá de la replicación técnica de los estilos definidos, la implementación del Estándar Lexy debe guiarse por principios sólidos de UX/UI para crear interfaces efectivas y agradables. Considera esta sección como una capa de refinamiento sobre la base técnica:
+
+Coherencia y Ritmo Espacial: Utiliza consistentemente las variables de espaciado (--space-*, --gutter-*) no solo dentro de los componentes, sino entre ellos y las secciones principales. Busca un flujo visual armonioso y evita tanto la congestión como el exceso de espacio vacío. El espaciado definido (16px, 24px, 36px, etc.) debe ser la norma para márgenes y gaps entre elementos discretos.
+
+Jerarquía Visual Intencional: Emplea la escala tipográfica (--font-*-size, --font-*-weight) y los colores (--color-text-*, --color-primary, --color-accent-*) para diferenciar claramente la importancia de la información. Los títulos deben destacar, el texto de cuerpo ser legible, y las acciones primarias (botones --primary-*) ser las más prominentes en su contexto.
+
+Claridad y Legibilidad: Asegura un contraste adecuado entre texto y fondo (especialmente con colores secundarios y placeholders). Utiliza el line-height especificado para facilitar la lectura de párrafos. Etiqueta (<label>) claramente todos los campos de formulario y controles interactivos. Los placeholders deben ser sugerentes, no sustitutos de labels.
+
+Affordance y Feedback: Los elementos interactivos (botones, enlaces, selects, tabs) deben parecer interactivos. Utiliza los estados :hover y :focus-visible de forma consistente para indicar interactividad. Las acciones deben proporcionar feedback claro:
+
+Click: Un estado :active sutil (ej. transform: translateY(1px) o cambio de sombra/fondo ligero).
+
+Carga/Proceso: Deshabilitar (:disabled) el botón de acción y añadir un indicador visual de carga (spinner) si la operación es asíncrona.
+
+Resultado: Confirmación clara mediante Modales (lexy-modal--confirmation), mensajes de éxito/error (idealmente en línea o mediante sistema de notificaciones/toasts - la implementación específica de toasts está fuera de esta guía visual, pero el feedback es necesario).
+
+Accesibilidad (Base):
+
+Utiliza HTML semántico (<button>, <nav>, <main>, <aside>, <header>, <footer>, etc.).
+
+Asocia siempre <label>s con sus <input>s (htmlFor/id).
+
+Proporciona texto alternativo (alt) descriptivo para imágenes significativas.
+
+Asegura que todos los elementos interactivos sean navegables y operables por teclado. El estilo :focus-visible definido es crucial para esto.
+
+Verifica contrastes de color mínimos (WCAG AA).
+
+Contextualidad Funcional:
+
+Aplica los tipos de layout (Ficha vs. SaaS) según el propósito de la pantalla.
+
+Utiliza los Headers y Footers apropiados para cada tipo de layout y flujo. No incluyas un footer si la vista no lo requiere contextualmente.
+
+Elige las variantes de color de botones según la prioridad de la acción en el contexto actual (Primario > Secundario > Contextual > Outline Neutro > Texto/Icono).
+
+Simplicidad y Minimalismo: Evita elementos visuales superfluos. Cada línea, borde, sombra y color debe tener un propósito claro dentro de la jerarquía o la funcionalidad. Sigue el principio de "menos es más" inherente al diseño Lexy.
+
+---
+
+Esta guía v12.1 consolidada y altamente técnica proporciona una descripción detallada y precisa del Sistema de Diseño Lexy, utilizando exclusivamente CSS estándar y variables CSS, lista para ser implementada directamente o utilizada como base por una herramienta de IA de desarrollo Frontend. Cubre principios, identidad, tokens, tipografía, layouts, componentes clave con sus estados y consideraciones responsivas.

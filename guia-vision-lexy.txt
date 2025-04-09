@@ -1,0 +1,78 @@
+**Bienvenido/a al Diseño de Desks en Lexy: Simplificando la Complejidad Legal**
+
+¡Hola!. En Lexy, nuestra misión es audaz y clara: **"Hacer fácil lo legal"**. No somos un estudio jurídico tradicional; somos una LegalTech en constante evolución, donde la tecnología, los procesos optimizados y una profunda conexión humana se unen para transformar la experiencia de nuestros clientes y de nuestro propio equipo.
+
+Como diseñador/a de plataformas web, tu rol será crucial en esta misión, específicamente en la creación de **"Desks"**: herramientas internas diseñadas para potenciar a nuestros abogados y ejecutivos. Esta guía te introducirá a los conceptos clave que sustentan los Desks y cómo tu trabajo impactará directamente en nuestra eficiencia y en la calidad del servicio que ofrecemos.
+
+**1. El Contexto: Flujos Operativos, Tasks y el Corazón del CRM**
+
+Para entender los Desks, primero necesitas comprender nuestro ecosistema operativo:
+
+- **El CRM (Actualmente Streak): El Centro Neurálgico (con sus límites).** Históricamente, nuestro CRM ha sido el corazón donde centralizamos la información del cliente, comunicaciones y el estado de los casos. Sin embargo, a medida que crecemos y nuestros procesos se vuelven más complejos, el CRM por sí solo no es suficiente para manejar todas las tareas eficientemente.
+- **El Flujo Operativo (FO): Nuestro Mapa de Ruta.** Imagina un mapa detallado que guía a nuestros abogados y ejecutivos (los "operativos") paso a paso en la gestión de un caso. Eso es el Flujo Operativo. Está implementado principalmente a través de vistas filtradas y columnas en nuestro CRM (Streak) y se compone de "Tasks".
+- **Tasks: Las Unidades de Trabajo.** Dentro del FO, cada acción específica es una "Task" (Tarea). Puede ser revisar un documento, contactar a un cliente, actualizar un estado, etc. El FO asegura que estas Tasks se realicen en el orden correcto y bajo los estándares de Lexy.
+
+**2. El Desafío: Cuando las Tasks se Vuelven "Big"**
+
+No todas las Tasks son iguales. Hemos identificado dos tipos:
+
+- **Small Tasks (Tareas Pequeñas):** Acciones rápidas, repetitivas y de bajo esfuerzo que se gestionan eficientemente dentro del Flujo Operativo estándar en el CRM.
+- **Big Tasks (Tareas Grandes):** Tareas complejas que demandan tiempo significativo, análisis profundo, recopilación y procesamiento de mucha información, y toma de decisiones estratégicas. Intentar manejarlas *solo* con las herramientas genéricas del CRM o el FO estándar se vuelve ineficiente, consume recursos valiosos y aumenta el riesgo de errores. *Este* es el problema que los Desks vienen a resolver.
+
+**3. La Solución: ¡Hola, Desk! 👋**
+
+Un **Desk** es una **aplicación web interna, personalizada y enfocada**, diseñada específicamente para **simplificar, optimizar y guiar la ejecución de una Big Task específica.**
+
+Piensa en un Desk como un "centro de comando" especializado para una misión compleja:
+
+- **Centraliza Información:** Reúne todos los datos y documentos necesarios para la Big Task en una única interfaz intuitiva.
+- **Guía el Proceso:** Estructura la Big Task en pasos lógicos y manejables, guiando al usuario a través del flujo de trabajo óptimo.
+- **Automatiza Sub-tareas:** Puede integrar automatizaciones para acciones repetitivas dentro de la Big Task (generar borradores de correo, validar datos, etc.).
+- **Facilita la Toma de Decisiones:** Presenta la información de manera clara para apoyar decisiones estratégicas.
+- **Conecta con el Ecosistema:** Aunque es una herramienta separada, un Desk interactúa con nuestro CRM y Flujo Operativo. Puede extraer datos necesarios y, una vez completada la Big Task, puede actualizar estados, registrar información o incluso disparar las siguientes Tasks en el FO.
+
+**Ejemplo Concreto: El Desk de Estudio**
+
+Una Big Task clásica es el "Estudio de Caso". Antes, un abogado debía navegar por el CRM, abrir múltiples documentos, buscar información dispersa y luego registrar su estrategia. Con el **Desk de Estudio**:
+
+1. Toda la información relevante del caso (datos del cliente, documentos clave, historial) se presenta organizada en *una sola pantalla*.
+2. El abogado analiza, define la estrategia y la registra *directamente en el Desk*.
+3. Al finalizar, presiona "Distribuir". El Desk automáticamente:
+    - Actualiza el estado del caso en el CRM.
+    - Genera y asigna las siguientes Tasks en el Flujo Operativo a los miembros del equipo correspondientes.
+    - Podría incluso generar comunicaciones predefinidas para el cliente.
+
+**4. Tu Rol como Diseñador/a de Desks: Claves UX/UI y Consideraciones**
+
+Tu misión es diseñar Desks que realmente cumplan la promesa de "Hacer fácil lo legal", pero aplicada a nuestros procesos internos. Aquí tus principios guía:
+
+- **Profunda Comprensión del Usuario y la Tarea:**
+    - ¿Quién usará este Desk? (Abogado, Ejecutivo Legal, etc.) ¿Cuál es su nivel de expertise técnico?
+    - ¿Cuál es la Big Task exacta que resuelve? ¿Cuáles son sus pasos, dolores y fricciones actuales? Colabora estrechamente con el Encargado de Producto (quien define la "Maqueta" o requerimientos) y los usuarios finales.
+- **Eficiencia y Flujo de Trabajo Óptimo:**
+    - Minimiza clics y pasos innecesarios.
+    - Diseña un flujo lógico e intuitivo que refleje cómo se realiza el trabajo mentalmente.
+    - Prioriza la información y las acciones más frecuentes.
+- **Claridad y Simplicidad:**
+    - Usa un lenguaje claro y evita la jerga innecesaria.
+    - Diseña interfaces limpias, organizadas y sin distracciones. La información debe ser fácil de escanear y comprender.
+    - Utiliza jerarquía visual para guiar la atención del usuario.
+- **Gestión de la Información:**
+    - ¿Qué datos necesita ver el usuario? ¿Cómo se deben presentar? (Tablas, resúmenes, gráficos simples).
+    - ¿Qué datos necesita ingresar el usuario? Diseña formularios claros y eficientes, con validaciones útiles.
+    - Considera cómo el Desk mostrará información proveniente del CRM/FO y cómo enviará información de vuelta.
+- **Prevención de Errores:**
+    - Diseña para minimizar la posibilidad de errores (confirmaciones para acciones críticas, feedback claro sobre las acciones realizadas).
+- **Consistencia:**
+    - Mantén la coherencia visual y funcional con otras herramientas internas de Lexy (si existen) y sigue las guías de estilo establecidas.
+- **Feedback y Escalabilidad:**
+    - La interfaz debe proporcionar feedback inmediato sobre las acciones del usuario.
+    - Piensa en la posibilidad de futuras mejoras o expansiones de la funcionalidad del Desk.
+
+**Conclusión: Construyendo la Eficiencia Interna**
+
+Los Desks son una pieza estratégica fundamental en la evolución de Lexy. Al diseñar estas herramientas, no solo estás creando interfaces web; estás diseñando la eficiencia, reduciendo la carga operativa de nuestro equipo y permitiéndoles enfocarse en lo que mejor saben hacer: brindar asesoría legal experta y conectar genuinamente con nuestros clientes.
+
+Tu habilidad para traducir necesidades complejas en soluciones web intuitivas y efectivas será clave para ayudarnos a cumplir nuestra misión: **Hacer fácil lo legal**, tanto para nuestros clientes como para nosotros mismos.
+
+¡Estamos emocionados de tenerte a bordo y ver los increíbles Desks que ayudarás a crear!
